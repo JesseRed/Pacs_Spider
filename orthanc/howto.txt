@@ -1,0 +1,7 @@
+1: starte orthanc in diesem Ordner
+2: gehe zu jarc04 PW: doctor / doctor
+3: in jarc: transfer >> suche auf jarc04 >> bilder auswaehlen und an BIOMAG2(DICOM) senden
+
+4: auf lokalem Browser: http://localhost:8042/app/explorer.html
+> subj. auswaehlen und DOWNLOAD
+Downlaod dann in: C:\Users\brodoehl\Downloads

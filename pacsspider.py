@@ -30,7 +30,31 @@ class PacsSpider:
         self.QryDateTimeFrom = QryDateTimeFrom
         self.QryDateTimeTo = QryDateTimeTo
         self.Modality = Modality
-    
+        print("set search parameter") 
+        print(f"QryDateTimeFrom = {self.QryDateTimeFrom}")
+        print(f"QryDateTimeTo = {self.QryDateTimeTo}")
+
+    def add_search_parameter(self, PatientID = "!!!", FamilyName= "!!!", GivenName = "!!!", BirthDateFrom="!!!", BirthDateTo="!!!", QryDateTimeFrom = "!!!", QryDateTimeTo = "!!!", Modality = "!!!"):
+        if not PatientID=="!!!":
+            self.PatientID = PatientID
+        if not FamilyName=="!!!":
+            self.FamilyName = FamilyName
+        if not GivenName=="!!!":
+            self.GivenName = GivenName
+        if not BirthDateFrom =="!!!":
+            self.BirthDateFrom = BirthDateFrom
+        if not BirthDateTo=="!!!":
+            self.BirthDateTo = BirthDateTo
+        if not QryDateTimeFrom=="!!!":
+            self.QryDateTimeFrom = QryDateTimeFrom
+        if not QryDateTimeTo=="!!!":
+            self.QryDateTimeTo = QryDateTimeTo
+        if not Modality=="!!!":
+            self.Modality = Modality
+        print("add_search_parameter") 
+        print(f"QryDateTimeFrom = {self.QryDateTimeFrom}")
+        print(f"QryDateTimeTo = {self.QryDateTimeTo}")
+
     def set_link(self, link):
         self.link = link
 
@@ -84,17 +108,31 @@ class PacsSpider:
         #self.driver.switch_to.default_content()
 
     def fill_form(self):
+        print(f"PatientID = {self.PatientID}")
+        print(f"FamilyName = {self.FamilyName}")
+        print(f"GivenName = {self.GivenName}")
+        print(f"BirthDateFrom = {self.BirthDateFrom}")
+        print(f"BirthDateTo = {self.BirthDateTo}")
+        print(f"QryDateTimeFrom = {self.QryDateTimeFrom}")
+        print(f"QryDateTimeTo = {self.QryDateTimeTo}")
+        print("fill form in P")
         self.driver.switch_to.frame(0)
         self.elem_PatientID.send_keys(self.PatientID)
         self.elem_FamilyName.send_keys(self.FamilyName)
         self.elem_GivenName.send_keys(self.GivenName)
+        print("fill form in P 2")
         self.elem_BirthDateFrom.send_keys(self.BirthDateFrom)
         self.elem_BirthDateTo.send_keys(self.BirthDateTo)
+        print("fill form in P 3")
         self.elem_QryDateTimeFrom.send_keys(self.QryDateTimeFrom)
+        print("fill form in P 3.5")
         self.elem_QryDateTimeTo.send_keys(self.QryDateTimeTo)
+        print("fill form in P 4")
         self.elem_Modality.send_keys(self.Modality)
         self.driver.implicitly_wait(2)
+        print("fill form in P 5")
         self.driver.switch_to.default_content()
+        print("fill form ende")
 
     def submit_form(self):
         self.driver.switch_to.frame(0)

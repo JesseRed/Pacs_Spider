@@ -66,12 +66,46 @@ class MainWindow(QtWidgets.QMainWindow):
         print("now transfering data from Pacs to orthanc")
         #P.set_search_parameter(PatientID = "*11031488")
         for index, row in df.iterrows():
-            row['found'] = "xxx"
             # setze nur in der Klasse es wird hier noch nicht auf der website eingetragen
-            patid = "*"+str(row["PatientID"])
-            fname = row["FamilyName"]
-            print(f"search for PatientID = {patid} FamilyName = {fname}")
-            P.set_search_parameter(PatientID = patid, FamilyName = fname)
+            # setze alle search Parameter auf Blank
+            P.set_search_parameter()
+            if self.ui.checkBox_PatientID.isChecked():
+                P.add_search_parameter(PatientID = ("*"+str(row["PatientID"])))
+            if self.ui.checkBox_FamilyName.isChecked():
+                P.add_search_parameter(FamilyName = row["FamilyName"])
+            if self.ui.checkBox_GivenName.isChecked():
+                P.add_search_parameter(GivenName = row["GivenName"])
+            if self.ui.checkBox_BirthDate.isChecked():
+                P.add_search_parameter(BirthDateFrom = row["BirthDate"], BirthDateTo = row["BirthDate"])
+            if self.ui.checkBox_5.isChecked():
+                P.add_search_parameter(QryDateTimeFrom = row["StudyDate"],QryDateTimeTo = row["StudyDate"])
+            # if self.ui.checkBox_Modality.isChecked():
+            #     P.add_parameter(Modality = row["Modality"])
+            
+            # PatientID = ""
+            # FamilyName= ""
+            # GivenName = ""
+            # BirthDateFrom=""
+            # BirthDateTo=""
+            # QryDateTimeFrom = ""
+            # QryDateTimeTo = ""
+            # Modality = ""
+            # print(f"search for PatientID = {patid} FamilyName = {fname}")
+            # if self.ui.checkBox_PatientID.isChecked():
+            #     PatientID = "*"+str(row["PatientID"])
+            # if self.ui.checkBox_FamilyName.isChecked():
+            #     FamilyName = row["FamilyName"]
+                
+
+            # P.set_search_parameter(PatientID = PatientID, 
+            #                        FamilyName = FamilyName,
+            #                        GivenName=GivenName,
+            #                        BirthDateFrom= BirthDateFrom, 
+            #                        BirthDateTo=BirthDateTo,
+            #                        QryDateTimeFrom=QryDateTimeFrom, 
+            #                        QryDateTimeTo=QryDateTimeTo,
+            #                        Modality=Modality)
+
             #P.set_search_parameter()
             #P.set_search_parameter(GivenName = "*"+row["GivenName"])
             #P.set_search_parameter(BirthDateFrom = "*"+row["BirthDate"])
@@ -79,9 +113,13 @@ class MainWindow(QtWidgets.QMainWindow):
             #P.set_search_parameter(QryDateTimeFrom = "*"+row["StudyDate"])
             #P.set_search_parameter(QryDateTimeTo = "*"+row["StudyDate"])
             try:
+                print("open page")
                 P.open_page()
+                print("get form elements")
                 P.get_form_elements()
+                print("clear form elements")
                 P.clear_form_elements()
+                print("fill form")
                 P.fill_form()
                 print(f"submit form")
                 P.submit_form()
@@ -97,7 +135,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 print(f"now select all studies")
                 P.select_all_studies()
                 print(f"now send to biomag")
-                P.send_to_biomag()
+                #P.send_to_biomag()
                 row["success"] = "success"
                 df.loc[index,"success"]="success"
 
